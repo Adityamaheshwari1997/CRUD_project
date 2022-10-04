@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD</title>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+button:hover {
+  opacity:1;
+}
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
+  }
+</style>
+</head>
+<body>
+
+<h2>Management System</h2>
+
+<table>
+  <tr>
+    <th>id</th>
+    <th>name </th>
+    <th>email</th>
+      <th>Mobile no.</th>
+  </tr>
+  {% for item in row %}
+  <tr>
+    <td>{{item.eid}}</td>           <!--IN case of ORM -->
+<!--<td>{{item.0}}</td>                    IN case of Normal SQL -->
+    <td>{{item.ename}}</td>
+    <td>{{item.mail}}</td>
+    <td>{{item.emobile}}</td>
+
+     <form action="/update/">
+      <input type="hidden" name = 'id' value = "{{item.eid}}" method = "get">
+      <td><button type="submit">Edit</button> </td>
+    </form>
+
+    <form action = "/delete/"method="post">
+        <input type="hidden" name = 'id' value="{{item.eid}}" method  = "get">
+      <td><button type="submit" >Delete</button></td>
+  </form>
+
+  </tr>
+  {% endfor %}
+</table>
+
+<form action = "/add_member/"method="get" style="border:1px solid #ccc">
+    <div class="clearfix" >
+      <button type="submit" class="add">+ Add Member </button>
+    </div>
+  </form>
+</body>
+</html>
+
